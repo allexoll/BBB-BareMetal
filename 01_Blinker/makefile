@@ -6,7 +6,6 @@ all: start.s main.c
 	$(CHAIN)-gcc -c main.c -o main.o
 	$(CHAIN)-ld start.o main.o -T memmap.ld -o main.elf
 	$(CHAIN)-objcopy main.elf spl.boot -O binary
-	#$(CHAIN)-objdump -D -b binary -marm startup.bin > startup.lst
 copy:
 	cp spl.boot ../boot
 
