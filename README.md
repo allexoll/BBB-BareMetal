@@ -8,23 +8,23 @@ This rep will contain bare metal programs, examples, and code for the AM335x, wi
 
 a few very important links:
 
-The AM335x Technical Reference Manual (yes, 4000+ pages)
+The AM335x Technical Reference Manual (yes, 4000+ pages) 
 http://www.ti.com/lit/ug/spruh73k/spruh73k.pdf
 
-The AM335x Datasheet (250 pages)
+The AM335x Datasheet (250 pages) 
 http://www.ti.com/lit/ds/symlink/am3352.pdf
 
-The BeagleBone Black Schematics
+The BeagleBone Black Schematics 
 https://github.com/CircuitCo/BeagleBone-Black/blob/master/BBB_SCH.pdf?raw=true
 
-The BeagleBone Black elinux wiki
+The BeagleBone Black elinux wiki 
 http://elinux.org/Beagleboard:BeagleBoneBlack
 
-For the boot procedure, you should look up this:
-https://github.com/auselen/down-to-the-bone 
+For the boot procedure, you should look up this: 
+https://github.com/auselen/down-to-the-bone  
 (I was not able to boot from anything else than USB tftp/bootp as of now, but if you found how, HMU.)
 
-Raspberry Pi related baremetal from Dwelch67, loads of examples
+Raspberry Pi related baremetal from Dwelch67, loads of examples 
 https://github.com/dwelch67/raspberrypi
 
 
