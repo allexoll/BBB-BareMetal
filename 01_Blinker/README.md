@@ -8,3 +8,4 @@ A few important points here:
 * the *_start* symbol **must** be the entrypoint
 * for the simplest peripheral access, i used assembly (namely *PUT32* and *GET32*)
 * the *memmap.ld* isn't complete in this example, as the origin is set to *0x0*
+* the copy target in the makefile is only specific to my boot setup (dnsmasq loading spl.boot)
