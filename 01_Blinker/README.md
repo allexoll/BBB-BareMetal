@@ -1,7 +1,7 @@
 01_Blinker
 ====================
 
-This example was the first one, to see if my boot procedure was working. I just wanted to blink the onboard leds without any fuss. it is inspired by Ali Utku Selen (https://github.com/auselen) in the down-to-the-bone repository. 
+This example was the first one, to see if my boot procedure was working. I just wanted to blink the onboard leds without any fuss. it is inspired by Ali Utku Selen (https://github.com/auselen under GNU GPL) in the down-to-the-bone repository. 
 
 ====================
 A few important points here:
