@@ -114,27 +114,28 @@ void GPIO_initPort(GPIO_t port)
 {
    if(GPIO_checkValidPortPin(port,0))  // pin 0 always exist
    {
-      CKM_MODULE_REG clk_module;
+      unsigned int setting = (1<<18) | (0x2<<0);   //enable functional clock & enable module, TRM 8.1.12.1.32
       switch(port)
       {
          case GPIO0:
             return;        // GPIO0 doesnt have a clock module register, TRM 8.1.12.1
             break;
          case GPIO1:
-            clk_module = CKM_PER_GPIO1_CLKCTRL;
+            CKM_setCLKModuleRegister(CKM_PER, CKM_PER_GPIO1_CLKCTRL, setting);
+            while((CKM_getCLKModuleRegister(CKM_PER, CKM_PER_GPIO1_CLKCTRL) & (0x3<<16)) != 0)
             break;
          case GPIO2:
-            clk_module = CKM_PER_GPIO2_CLKCTRL;
+            CKM_setCLKModuleRegister(CKM_PER, CKM_PER_GPIO2_CLKCTRL, setting);
+            while((CKM_getCLKModuleRegister(CKM_PER, CKM_PER_GPIO2_CLKCTRL) & (0x3<<16)) != 0)
             break;
          case 3:
-            clk_module = CKM_PER_GPIO3_CLKCTRL;
+            CKM_setCLKModuleRegister(CKM_PER, CKM_PER_GPIO3_CLKCTRL, setting);
+            while((CKM_getCLKModuleRegister(CKM_PER, CKM_PER_GPIO3_CLKCTRL) & (0x3<<16)) != 0)
             break;
          default:
             // TODO: raise error (not possible, checked port before: /port)
             break;
       }
-      unsigned int setting = (1<<18) | (0x2<<0);   //enable functional clock & enable module, TRM 8.1.12.1.32
-      CKM_setCLKModuleRegister(CKM_PER, clk_module, setting);
    }
 }
 

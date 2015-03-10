@@ -215,7 +215,6 @@ void UART_initUART(UART_t uart, unsigned int baudrate, STOP_BIT_t stopBit, PARIT
       switch(uart)
       {
          case UART0: // tx=1.11  rx=1.10  cts=1.8  rts=1.9
-            LED_on(USER_LED0);
             
             GPIO_initPort(GPIO1);
             CM_setCtrlModule(CM_conf_uart0_txd,0); // do nothing on UART0_tx
@@ -225,45 +224,42 @@ void UART_initUART(UART_t uart, unsigned int baudrate, STOP_BIT_t stopBit, PARIT
             
             unsigned int temp = CKM_getCLKModuleRegister(CKM_WKUP,CKM_WKUP_CLKSTCTRL);
             temp &= ~(0b11);
-            temp |= 0x2;      // software-forced wake-up transition on the "always on clock domain", TRM Table 8-92
+            temp |= 0b10;      // software-forced wake-up transition on the "always on clock domain", TRM Table 8-92
             CKM_setCLKModuleRegister(CKM_WKUP,CKM_WKUP_CLKSTCTRL,temp);
             
             temp = CKM_getCLKModuleRegister(CKM_PER,CKM_PER_L4HS_CLKSTCTRL);
             temp &= ~(0b11);
-            temp |= 0x2;      // software-forced wake up transition on the L4 high speed domain
+            temp |= 0b10;      // software-forced wake up transition on the L4 high speed domain
                    CKM_setCLKModuleRegister(CKM_PER,CKM_PER_L4HS_CLKSTCTRL,temp);
 
             temp = CKM_getCLKModuleRegister(CKM_WKUP,CKM_WKUP_UART0_CLKCTRL);
             temp &= ~(0b11);
-            temp |= 0x2;      // Module is explicitly enabled,    TRM Table 8-137
+            temp |= 0b10;      // Module is explicitly enabled,    TRM Table 8-137
                    CKM_setCLKModuleRegister(CKM_WKUP,CKM_WKUP_UART0_CLKCTRL,temp);
+            while((CKM_getCLKModuleRegister(CKM_WKUP, CKM_WKUP_UART0_CLKCTRL) & (0b11<<16)) != 0); // wait until clock transition is complete
             
             // TODO: verifiy it next block is needed for uart0
+            // warning, why would the UART1 registers need modification when configuring UART0?
             temp = CKM_getCLKModuleRegister(CKM_PER,CKM_PER_UART1_CLKCTRL);
             temp &= ~(0b11);
-            temp |= 0x2;      // Module is explicitly enabled,    TRM Table 8-137
+            temp |= 0b10;      // Module is explicitly enabled,    TRM Table 8-137
                    CKM_setCLKModuleRegister(CKM_PER,CKM_PER_UART1_CLKCTRL,temp);
             
             temp = GET32(uart_base+0x54);    // SYSC
             temp |= 0x2;      // uart module reset
             PUT32(uart_base+0x54,temp);
             
-            LED_off(USER_LED0);
-            LED_on(USER_LED1);
             while((GET32(uart_base+0x58)&1)==0);   // wait for reset to be complete
-            LED_off(USER_LED1);
             
             temp = GET8(uart_base+0x54);
             temp |= (0x1<<3); // no idle
             PUT8(uart_base+0x54,temp);
             
-            LED_on(USER_LED2);
             while(((GET32(uart_base+0x14)&0x40)!=0x40));    // wait for txfifo to be empty
             
             
             float div = 48000000.0/(16.0*(float)baudrate);
             unsigned int intdiv = (unsigned int) div;
-            LED_on(USER_LED3);
             PUT8(uart_base+0x04,0);
             PUT8(uart_base+0x20,0x7);        // Disable modeselect (default) TRM table 19-50
             PUT8(uart_base+0x0C,~(0x7C));    // divisor latch enable, access DLL DHL, set uart as 8bit
