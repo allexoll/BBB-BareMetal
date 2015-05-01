@@ -34,5 +34,5 @@ Raspberry Pi related baremetal from Dwelch67, loads of examples
 https://github.com/dwelch67/raspberrypi
 
 
-*keep in mind, all those examples are loaded via USB (tftp/boop) in the on-chip RAM, not in the external DDR as it does when working with Code Composer Studio*
+*keep in mind, all those examples are loaded via USB (tftp/boop) in the on-chip RAM, not in the external DDR as it does when working with Code Composer Studio, UNTIL sample 08_test_CXX where it IS supposed to run from 0x8000000.
 
