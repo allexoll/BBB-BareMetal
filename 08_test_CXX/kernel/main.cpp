@@ -30,7 +30,6 @@ void RTCINT_IRQHandler()
    NVIC_ClearPending(RTCINT_IRQn);
    int s = GET32(0x44E3E000+0x00);
    cout << (s>>4) << (s&0xf) << endl;
-   //printf("%d%d\n",s>>4,s&0xf);
 }
 
 class test_class
@@ -54,8 +53,8 @@ vector <int> *l;
 
 int main ()
 {
-   string b = "blablabla";
-   cout << "test cout: " << b<< endl;
+   string stringtest = "blablabla";
+   cout << "test cout: " << stringtest<< endl;
    l = new vector <int>;
    
    l->push_back(0b0000);
@@ -78,6 +77,9 @@ int main ()
    CKM_setCLKModuleRegister(CKM_RTC,CKM_RTC_CLKSTCTRL,0x2);   // software wakeup on RTC power domain
    CKM_setCLKModuleRegister(CKM_RTC,CKM_RTC_RTC_CLKCTRL,0x2);   // enable RTC clock power domain
    
+   PUT32(0x44E3E000+0x6C,0x83E70B13);     // disable protection on register
+   PUT32(0x44E3E000+0x70,0x95A4F1E0);     // disable protection on register
+   
    PUT32(0x44E3E000+0x40,0x1);      // run RTC
    
    PUT32(0x44E3E000+0x54,1<<3 | 1<<6); // enable 32khz (bit 6) & select 32 khz osc
@@ -90,6 +92,13 @@ int main ()
 
    
    printf("l = 0x%x\n",l->size());
+   
+   // small float test
+   volatile float a = 0.707;
+   volatile float b = 1.414;
+   volatile float c;
+   c = b*a;
+   cout << c << endl;
 
    while(true)
    {
