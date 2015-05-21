@@ -7,9 +7,6 @@
 #ifndef __control_module_H
 #define __control_module_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif // __cplusplus
 
 /**
  * @brief Control Module register & their coresponding offsets: TRM 9.3
@@ -253,9 +250,7 @@ void CM_setCtrlModule(CONTROL_MODULE module, unsigned int value);
  **/
 unsigned int CM_getCtrlModule(CONTROL_MODULE module);
 
-#ifdef __cplusplus
-}
-#endif // __cplusplus
+
 
 #endif /* defined(__control_module_H) */
 

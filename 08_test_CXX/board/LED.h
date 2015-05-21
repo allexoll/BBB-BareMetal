@@ -8,9 +8,6 @@
 #ifndef __LED_H
 #define __LED_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif // __cplusplus
 
 /**
  * @brief User led number (0-3)
@@ -64,9 +61,7 @@ void LED_invert(USER_LED_t led);
  **/
 void LED_setValue(unsigned char value);
    
-#ifdef __cplusplus
-}
-#endif // __cplusplus
+
 
 #endif /* defined(__LED_H) */
 

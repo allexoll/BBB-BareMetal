@@ -8,9 +8,6 @@
 #ifndef __types_H
 #define __types_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif // __cplusplus
 
 /**
  @brief boolean (true/false)
@@ -21,9 +18,7 @@ typedef enum
    false = 0
 }bool;
 
-#ifdef __cplusplus
-}
-#endif // __cplusplus
+
 
 #endif
 

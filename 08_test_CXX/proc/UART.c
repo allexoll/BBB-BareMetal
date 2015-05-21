@@ -307,7 +307,7 @@ char UART_getC(UART_t uart)
    return GET8(uart_base+0x0);
 }
 
-int UART_putString(UART_t uart,const char *str, unsigned int length)
+int UART_putString(UART_t uart, const char *str, unsigned int length)
 {
    for(int i = 0; i < length; i++)
    {

@@ -8,9 +8,6 @@
 #ifndef __UART_H
 #define __UART_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif // __cplusplus
    
 /**
  * @brief UART number (0-5)
@@ -110,9 +107,7 @@ int UART_putString(UART_t uart,const char *str, unsigned int length);
  **/
 int UART_getString(UART_t uart, char *buf, unsigned int length);
 
-#ifdef __cplusplus
-}
-#endif // __cplusplus
+
 
 #endif /* defined(__UART_H) */
 

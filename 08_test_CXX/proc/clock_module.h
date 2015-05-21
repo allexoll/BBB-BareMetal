@@ -7,9 +7,6 @@
 #ifndef __clock_module_H
 #define __clock_module_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif // __cplusplus
 
 /**
  * @brief Clock Modules Registers & their coresponding offsets from their chapter/domain/memory zone: TRM 8.1.12
@@ -176,9 +173,7 @@ void CKM_setCLKModuleRegister(CLK_MODULE_t module, CKM_MODULE_REG reg, unsigned 
  **/
 unsigned int CKM_getCLKModuleRegister(CLK_MODULE_t module, CKM_MODULE_REG reg);
 
-#ifdef __cplusplus
-}
-#endif // __cplusplus
+
 
 #endif /* defined(__clock_module__H) */
 

@@ -14,11 +14,12 @@ WFLAGS= -Wall
 MCPU=-mcpu=cortex-a8
 
 #CFLAGS are the flags passed to gcc
-CFLAGS= $(WFLAGS) -std=gnu99 -mfpu=neon -mfloat-abi=softfp $(MCPU) -Os
+CFLAGS= $(WFLAGS) -std=gnu99 -mfpu=neon -mfloat-abi=softfp $(MCPU) -O2
 
-#CPP FLAGS
-CPPFLAGS= $(WFLAGS) -std=c++11 -fno-exceptions -fno-unwind-tables -fno-rtti -mfpu=neon $(MCPU) -Os -mfloat-abi=softfp
+#CPP FLAGS are the flags passed to g++
+CPPFLAGS= $(WFLAGS) -std=c++11 -fno-exceptions -fno-unwind-tables -fno-rtti -mfpu=neon $(MCPU) -O2 -mfloat-abi=softfp
 
+#Asm Flags are the flags passed to as
 AFLAGS=-mfpu=neon
 
 #build directories
@@ -28,7 +29,6 @@ BIN=bin/
 
 LIBPATH=/usr/local/gcc_arm/gcc-arm-none-eabi-4_9-2014q4/arm-none-eabi/lib/
 LIBS=
-# -lc -lm -lstdc++ -lsupc++
 MMAP= memmap.ld
 OBJLIST= $(OBJ)core.o $(OBJ)proc.o $(OBJ)board.o $(OBJ)sys.o $(OBJ)kernel.o
 
@@ -37,7 +37,7 @@ COPYARG=CHAIN="$(CHAIN)" CFLAGS="$(CFLAGS)" AFLAGS="$(AFLAGS)" CPPFLAGS="$(CPPFL
 all: dir $(OBJ)core.o $(OBJ)proc.o $(OBJ)board.o $(OBJ)sys.o $(OBJ)kernel.o
 	@rm -rf $(BIN)*.boot
 	@echo "assembling output file..."
-	$(CHAIN)g++ -L $(LIBPATH) --verbose -T $(MMAP) $(OBJLIST)  $(LIBS) -o $(OBJ)main.elf
+	$(CHAIN)g++ -L $(LIBPATH) -T $(MMAP) $(OBJLIST)  $(LIBS) -o $(OBJ)main.elf
 	$(CHAIN)objcopy $(OBJ)main.elf $(BIN)spl.boot -O binary
 	@echo "done!"
 	$(CHAIN)size $(OBJ)main.elf

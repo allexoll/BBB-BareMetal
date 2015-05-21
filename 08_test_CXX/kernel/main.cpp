@@ -14,11 +14,13 @@
  * the executable size of this example is huge, i dont know why it is THAT huge.
  **/
 
+extern "C" {
 #include <stdio.h>
 #include "../core/llma.h"
 #include "../proc/clock_module.h"
 #include "../proc/interrupt.h"
 #include "../board/LED.h"
+}
 #include <vector>
 #include <string>
 #include <iostream>
@@ -27,9 +29,9 @@ using namespace std;
 extern "C"
 void RTCINT_IRQHandler()
 {
-   NVIC_ClearPending(RTCINT_IRQn);
-   int s = GET32(0x44E3E000+0x00);
-   cout << (s>>4) << (s&0xf) << endl;
+   NVIC_ClearPending(RTCINT_IRQn);  // Clear RTC int
+   int s = GET32(0x44E3E000+0x00);  // get seconds from RTC
+   cout << (s>>4) << (s&0xf) << endl;  // print seconds
 }
 
 class test_class
@@ -98,7 +100,7 @@ int main ()
    volatile float b = 1.414;
    volatile float c;
    c = b*a;
-   cout << c << endl;
+   cout <<"a*b = "<< a << "*" << b << " = " << c << endl;
 
    while(true)
    {

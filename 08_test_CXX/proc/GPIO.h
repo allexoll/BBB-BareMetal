@@ -7,9 +7,6 @@
 #ifndef __GPIO_h
 #define __GPIO_h
 
-#ifdef __cplusplus
-extern "C" {
-#endif // __cplusplus
 
 /**
  * @brief GPIO pin number (0-31)
@@ -133,9 +130,7 @@ void GPIO_setPort(GPIO_t port, unsigned int value);
 unsigned int GPIO_getPort(GPIO_t port);
 
 
-#ifdef __cplusplus
-}
-#endif // __cplusplus
+
 
 #endif
 

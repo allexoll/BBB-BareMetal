@@ -7,9 +7,6 @@
 #ifndef __pad_H
 #define __pad_H
 
-#ifdef __cplusplus
-extern "C" {
-#endif // __cplusplus
 
 
 #include "control_module.h"
@@ -49,9 +46,7 @@ void PAD_setMode(CONTROL_MODULE module, pinmode_t mode);
  **/
 pinmode_t PAD_getMode(CONTROL_MODULE module);
 
-#ifdef __cplusplus
-}
-#endif // __cplusplus
+
 
 #endif /* defined(__pad_H) */
 

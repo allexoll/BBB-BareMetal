@@ -8,10 +8,7 @@
 #ifndef __llma_h
 #define __llma_h
 
-#ifdef __cplusplus
-extern "C"
-{
-#endif // __cplusplus
+
    
 #include <stdint.h>
 
@@ -93,9 +90,7 @@ void CPU_irqE();
  **/
 void CPU_irqD();
 
-#ifdef __cplusplus
-}
-#endif // __cplusplus
+
 
 #endif
 
