@@ -39,16 +39,16 @@ https://github.com/dwelch67/raspberrypi
 ## Loading Bare Metal App via U-Boot
 This section guides you to configuring U-Boot for loading a bare metal application via SD Card into the external RAM as an alternative to USB (tftp/boop) method.
 
-# Explanation
+### Explanation
 U-Boot's uEnv.txt file specifies how the board will boot and, in the case of a bare metal 
 application, specifies what image to load. However, we don't want to have to 
 boot to Linux on the target each time we want to change the file to load, so, we tell U-Boot via uEnv.txt 
-to load your bare metal application binary (`your_application.bin`, ` spl.boot`, etc, ...).
+to load your bare metal application binary (`your_application.bin`, ` spl.boot`, `etc`).
 
 1. **Prepare the SD Card:**
    - Format your microSD card using FAT32 filesystem.
    - Download and copy U-Boot bootloader binary (`MLO` and `u-boot.img`) onto the SD card boot directory.
-   - Place your bare metal application binary (`your_application.bin`, ` spl.boot`, etc, ...) on the SD card.
+   - Place your bare metal application binary (`your_application.bin`, ` spl.boot`, `etc`) on the SD card.
 
 2. **Create your uEnv.txt file:**
    - On your host, create a text file called uEnv.txt somewhere which can hold the UBoot command. It’s easier
@@ -66,7 +66,7 @@ to load your bare metal application binary (`your_application.bin`, ` spl.boot`,
    - U-Boot will load and execute `MLO`, then `u-boot.img` from the SD card.
    - You should see U-Boot prompt:
      ```
-      Boot 2018.01-00002-g9aa111a004 (Jan 20 2018 - 12:45:29 -0600), Build: jenkinsgithub_Bootloader-Builder-32
+      Boot 2018.01-00002-g9aa111a004 (Jan 20 2018 - 12:45:29 -0600), Build: jenkins_github_Bootloader-Builder-32
       CPU : AM335X-GP rev 2.1
       I2C: ready
       DRAM: 512 MiB
