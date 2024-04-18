@@ -36,3 +36,42 @@ https://github.com/dwelch67/raspberrypi
 
 *keep in mind, all those examples are loaded via USB (tftp/boop) in the on-chip RAM, not in the external DDR as it does when working with Code Composer Studio, UNTIL sample 08_test_CXX where it IS supposed to run from 0x8000000.
 
+## SD Card Boot Procedure
+If you want to boot your bare metal aplications from the SD Card into the external ram, you should follow these steps:
+
+1. **Prepare the SD Card:**
+   - Format your microSD card using FAT32 filesystem.
+   - Download and copy U-Boot bootloader binary (`MLO` and `u-boot.img`) onto the SD card root directory.
+   - Place your bare metal application binary (`your_application.bin`) on the SD card.
+
+2. **Configure U-Boot:**
+   - Connect your BeagleBone Black to a computer via USB cable.
+   - Power on the board while holding down the "Boot" button.
+   - The board will enter USB boot mode, and you will see a new drive named "BEAGLEBONE".
+   - Copy the `uEnv.txt` file onto the SD card root directory. This file should contain:
+     ```
+     mmcdev=1
+     bootpart=1:2
+     mmcroot=/dev/mmcblk1p2 ro
+     optargs=quiet drm.debug=7
+     capemgr.disable_partno=
+     ```
+   - Save and eject the SD card.
+
+3. **Boot from SD Card:**
+   - Insert the prepared SD card into the BeagleBone Black.
+   - Power on the board.
+   - U-Boot will load and execute `MLO`, then `u-boot.img` from the SD card.
+   - You should see U-Boot prompt.
+
+   - **On Ubuntu Linux**:
+     - Open a terminal window.
+     - Use the `lsblk` command to identify the device node of your SD card (e.g., `/dev/sdX`, where X is a letter representing your SD card).
+     - Unmount any partitions on the SD card using the `umount` command (e.g., `sudo umount /dev/sdX1`).
+     - Execute the following commands to copy your application binary to the SD card:
+       ```
+       sudo cp your_application.bin /media/$USER/BEAGLEBONE
+       sudo sync
+       ```
+     - Safely eject the SD card.
+     
