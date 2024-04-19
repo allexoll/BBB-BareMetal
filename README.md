@@ -67,40 +67,40 @@ to load your bare metal application binary (`your_application.bin`, ` spl.boot`,
    - U-Boot will load and execute `MLO`, then `u-boot.img` from the SD card.
    - You should see U-Boot prompt:
      ```
-    U-Boot SPL 2017.05-rc2 (May 02 2017 - 08:53:40)
-    Trying to boot from MMC1
-    *** Warning - bad CRC, using default environment
-
-    reading u-boot.img
-    reading u-boot.img
-
-
-    U-Boot 2017.05-rc2 (May 02 2017 - 08:53:40 +0530)
-
-    CPU  : AM335X-GP rev 2.1
-    I2C:   ready
-    DRAM:  512 MiB
-    MMC:   OMAP SD/MMC: 0, OMAP SD/MMC: 1
-    *** Warning - bad CRC, using default environment
-
-    <ethaddr> not set. Validating first E-fuse MAC
-    Net:   cpsw, usb_ether
-    Press SPACE to abort autoboot in 2 seconds
-    switch to partitions #0, OK
-    mmc0 is current device
-    SD/MMC found on device 0
-    reading boot.scr
-    ** Unable to read file boot.scr **
-    reading uEnv.txt
-    122 bytes read in 6 ms (19.5 KiB/s)
-    Loaded env from uEnv.txt
-    Importing environment from mmc0 ...
-    Running uenvcmd ...
-    reading spl.boot
-    4750 bytes read in 8 ms (579.1 KiB/s)
-    *** Booting to BareMetal ***
-    ## Starting application at 0x80000000 ...
-    UART0 Initialized...
+             U-Boot SPL 2017.05-rc2 (May 02 2017 - 08:53:40)
+             Trying to boot from MMC1
+             *** Warning - bad CRC, using default environment
+         
+             reading u-boot.img
+             reading u-boot.img
+         
+         
+             U-Boot 2017.05-rc2 (May 02 2017 - 08:53:40 +0530)
+         
+             CPU  : AM335X-GP rev 2.1
+             I2C:   ready
+             DRAM:  512 MiB
+             MMC:   OMAP SD/MMC: 0, OMAP SD/MMC: 1
+             *** Warning - bad CRC, using default environment
+         
+             <ethaddr> not set. Validating first E-fuse MAC
+             Net:   cpsw, usb_ether
+             Press SPACE to abort autoboot in 2 seconds
+             switch to partitions #0, OK
+             mmc0 is current device
+             SD/MMC found on device 0
+             reading boot.scr
+             ** Unable to read file boot.scr **
+             reading uEnv.txt
+             122 bytes read in 6 ms (19.5 KiB/s)
+             Loaded env from uEnv.txt
+             Importing environment from mmc0 ...
+             Running uenvcmd ...
+             reading spl.boot
+             4750 bytes read in 8 ms (579.1 KiB/s)
+             *** Booting to BareMetal ***
+             ## Starting application at 0x80000000 ...
+             UART0 Initialized...
      ```
 
      
