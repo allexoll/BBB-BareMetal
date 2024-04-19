@@ -47,7 +47,8 @@ to load your bare metal application binary (`your_application.bin`, ` spl.boot`,
 
 1. **Prepare the SD Card:**
    - Format your microSD card using FAT32 filesystem.
-   - Download and copy U-Boot bootloader binary (`MLO` and `u-boot.img`) onto the SD card boot directory.
+   - Download and copy the U-Boot bootloader binary (MLO and u-boot.img) to the SD card's boot directory,
+       (MLO and u-boot.img prebuilt images available in the [Uboot](Uboot) folder).
    - Place your bare metal application binary (`your_application.bin`, ` spl.boot`, `etc`) on the SD card.
 
 2. **Create your uEnv.txt file:**
@@ -55,71 +56,51 @@ to load your bare metal application binary (`your_application.bin`, ` spl.boot`,
      to edit this way in a text editor than inside the UBoot prompt.
    - Copy the `uEnv.txt` file onto the SD card boot directory. This file should contain:
      ```
-     uenvcmd=setenv loadaddr 0x80000000; fatload mmc 1:0 ${loadaddr} spl.boot; echo *** Booting 
+     uenvcmd=setenv loadaddr 0x80000000; fatload mmc 0 ${loadaddr} spl.boot; echo *** Booting 
      to BareMetal ***;go ${loadaddr};
      ```
    - Save and eject the SD card.
 
 3. **Boot from SD Card:**
    - Insert the prepared SD card into the BeagleBone Black.
-   - Push the SD Card boot button(`SW2`) and then Power on the board.
+   - Push the SD Card boot button(`S2`) and then Power on the board.
    - U-Boot will load and execute `MLO`, then `u-boot.img` from the SD card.
    - You should see U-Boot prompt:
      ```
-      Boot 2018.01-00002-g9aa111a004 (Jan 20 2018 - 12:45:29 -0600), Build: jenkins_github_Bootloader-Builder-32
-      CPU : AM335X-GP rev 2.1
-      I2C: ready
-      DRAM: 512 MiB
-      No match for driver 'omap_hsmmc'
-      No match for driver 'omap_hsmmc'
-      Some drivers were not found
-      Reset Source: Global external warm reset has occurred.
-      Reset Source: watchdog reset has occurred.
-      Reset Source: Global warm SW reset has occurred.
-      Reset Source: Power-on reset has occurred.
-      MMC: OMAP SD/MMC: 0, OMAP SD/MMC: 1
-      Using default environment
-      Board: BeagleBone Black
-      <ethaddr> not set. Validating first E-fuse MAC
-      BeagleBone Black:
-      Model: SeeedStudio BeagleBone Green:
-      debug: process_cape_part_number:[BB-BONE-ZEN-01]
-      debug: process_cape_part_number:[42422D424F4E452D5A454E2D3031]
-       ....
-      Scanning mmc 1:1...
-      gpio: pin 56 (gpio 56) value is 0
-      gpio: pin 55 (gpio 55) value is 0
-      gpio: pin 54 (gpio 54) value is 0
-      gpio: pin 53 (gpio 53) value is 1
-      switch to partitions #0, OK
-      mmc1(part 0) is current device
-      gpio: pin 54 (gpio 54) value is 1
-      Checking for: /uEnv.txt ...
-      286 bytes read in 27 ms (9.8 KiB/s)
-      gpio: pin 55 (gpio 55) value is 1
-      Loaded environment from /uEnv.txt
-      Importing environment from mmc ...
-      Checking if uenvcmd is set ...
-      gpio: pin 56 (gpio 56) value is 1
-      Running uenvcmd ...
-      using musb-hdrc, OUT ep1out IN ep1in STATUS ep2in
-      MAC b0:d5:cc:47:00:d5
-      HOST MAC de:ad:be:af:00:00
-      RNDIS ready
-      musb-hdrc: peripheral reset irq lost!
-      high speed config #2: 2 mA, Ethernet Gadget, using RNDIS
-      USB RNDIS network up!
-      Using usb_ether device
-      TFTP from server 192.168.7.1; our IP address is 192.168.7.2
-      Filename '/home/brian/cmpt433/public/baremetal/download.bin'.
-      Load address: 0x80000000
-      Loading: *##
-       100.6 KiB/s
-      done
-      Bytes transferred = 8496 (2130 hex)
-      *** Booting to BareMetal ***
-      ## Starting application at 0x80000000 ...
-      StarterWare AM335X UART Interrupt appl
+    U-Boot SPL 2017.05-rc2 (May 02 2017 - 08:53:40)
+    Trying to boot from MMC1
+    *** Warning - bad CRC, using default environment
+
+    reading u-boot.img
+    reading u-boot.img
+
+
+    U-Boot 2017.05-rc2 (May 02 2017 - 08:53:40 +0530)
+
+    CPU  : AM335X-GP rev 2.1
+    I2C:   ready
+    DRAM:  512 MiB
+    MMC:   OMAP SD/MMC: 0, OMAP SD/MMC: 1
+    *** Warning - bad CRC, using default environment
+
+    <ethaddr> not set. Validating first E-fuse MAC
+    Net:   cpsw, usb_ether
+    Press SPACE to abort autoboot in 2 seconds
+    switch to partitions #0, OK
+    mmc0 is current device
+    SD/MMC found on device 0
+    reading boot.scr
+    ** Unable to read file boot.scr **
+    reading uEnv.txt
+    122 bytes read in 6 ms (19.5 KiB/s)
+    Loaded env from uEnv.txt
+    Importing environment from mmc0 ...
+    Running uenvcmd ...
+    reading spl.boot
+    4750 bytes read in 8 ms (579.1 KiB/s)
+    *** Booting to BareMetal ***
+    ## Starting application at 0x80000000 ...
+    UART0 Initialized...
      ```
 
      
