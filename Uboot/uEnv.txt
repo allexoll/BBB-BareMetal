@@ -1,0 +1,1 @@
+uenvcmd=setenv loadaddr 0x80000000; fatload mmc 0 ${loadaddr} spl.boot; echo *** Booting to BareMetal ***;go ${loadaddr};
