@@ -1,11 +1,11 @@
-CHAINPATH=/usr/local/gcc_arm/gcc-arm-none-eabi-4_8-2014q3/bin/
+CHAINPATH=/bin/
 CHAIN=$(CHAINPATH)arm-none-eabi
 CFLAGS=-std=gnu99 -Wall -mfpu=neon -mhard-float -mcpu=cortex-a8
 AFLAGS=-mfpu=neon
 OBJ=obj/
 BIN=bin/
 
-all: start.o1 main.o GPIO.o pad.o control_module.o clock_module.o LED.o UART.o
+all: start.o1 main.o GPIO.o pad.o control_module.o clock_module.o LED.o UART.o wdt_control.o
 	$(CHAIN)-ld -T memmap.ld $(OBJ)start.o1 $(OBJ)*.o -o $(OBJ)main.elf
 	$(CHAIN)-objcopy $(OBJ)main.elf $(BIN)spl.boot -O binary
 
@@ -32,6 +32,9 @@ LED.o: LED.c
 
 UART.o:UART.c
 	$(CHAIN)-gcc $(CFLAGS) -c UART.c -o $(OBJ)UART.o
+
+wdt_control.o:wdt_control.c
+	$(CHAIN)-gcc $(CFLAGS) -c wdt_control.c -o $(OBJ)wdt_control.o
 
 copy:
 	cp $(BIN)spl.boot ../boot
