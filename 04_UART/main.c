@@ -3,6 +3,7 @@
 #include "GPIO.h"
 #include "LED.h"
 #include "UART.h"
+#include "wdt_control.h"
 
 #define TIME 500000
 
@@ -15,9 +16,10 @@
 void _main (void)
 {
    LED_init();
-   
+   disable_watchdog_timer();
+
    UART_initUART(UART0,115200,STOP1,PARITY_NONE,FLOW_OFF);
-   UART_putString(UART0,"UART0 Initialized...\n",21);
+   UART_putString(UART0,"UART0 Initialized...\n\r",22);
    while(1)
    {
       UART_putC(UART0,UART_getC(UART0));
